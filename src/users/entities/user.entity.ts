@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Restaurant } from '../../restaurants/entities/restaurant.entity';
+import { Role } from '../../roles/entities/role.entity';
 
 @Entity('users')
 export class User {
@@ -18,8 +19,8 @@ export class User {
   @ManyToOne(() => Restaurant)
   restaurant: Restaurant;
 
-  @Column()
-  role: string;
+  @ManyToOne(() => Role, (role) => role.users)
+  role: Role;
 
   @Column({ default: true })
   isActive: boolean;

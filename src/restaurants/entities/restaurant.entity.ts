@@ -2,8 +2,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
+import { Role } from '../../roles/entities/role.entity';
 
 @Entity('restaurants')
 export class Restaurant {
@@ -22,6 +25,9 @@ export class Restaurant {
 
   @Column()
   email: string;
+
+  @ManyToOne(() => Role, (role) => role.restaurant)
+  role: Role;
 
   @Column()
   cuisine: string;
